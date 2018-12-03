@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+<head>
+ <title>  Input  </title>
+
+ <link rel="stylesheet" type="text/css" href="styles.css">
+
+
+</head>
+    
+<body>
+    
+
+<div class="row">
+    <p>Click every input.</p>
+  </div>
+
+  <div id="entries">
+
+  </div>
+
+  <div class="row">
+    <span>
+      <input class="name" id="age" type="text" placeholder="21" /><label for="age">Age</label>
+    </span>
+    <span>
+      <input class="name" id="height" type="text" placeholder="0" /><label for="height">Height</label>
+    </span>
+    <span>
+      <input class="name" id="weight" type="text" placeholder="100 " /><label for="weight">Weight</label>
+    </span>
+  </div>
+  <div class="row">
+      <h3 id="heading-clothes"> Add your Clothing </h3>
+    <span>
+      <input class="gate" id="class" type="text" placeholder="Wizard!" /><label for="class"> Tshirt </label>
+    </span>
+    <span>
+      <input class="gate" id="element" type="text" placeholder="Five to choose from" /><label for="element"> Pant/Shorts </label>
+    </span>
+    <span>
+      <input class="gate" id="move" type="text" placeholder="Secret book attack!" /><label for="move"> Shoes </label>
+    </span>
+  </div>
+  <div class="row">
+    <span>
+      <input class="skinny" id="english" type="text" placeholder="Do you speak it?" /><label for="english">English</label>
+    </span>
+    <span>
+      <input class="skinny" id="burger" type="text" placeholder="A Royale with cheese?" /><label for="burger">Burger</label>
+    </span>
+    <span>
+      <input class="skinny" id="wallet" type="text" placeholder="Bad Mother****er" /><label for="wallet">Wallet</label>
+    </span>
+  </div>
+  <div class="row">
+    <span>
+      <input class="slide-up" id="card" type="text" placeholder="Fund me!" /><label for="card">Credit Card</label>
+    </span>
+    <span>
+      <input class="slide-up" id="expires" type="text" placeholder="Month Day, Year" /><label for="expires">Expires</label>
+    </span>
+    <span>
+      <input class="slide-up" id="security" type="text" placeholder="Public" /><label for="security">Security Code</label>
+    </span>
+  </div>
+
+
+ 
+  </div>
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"> </script>
+  <script type="text/javascript"> 
+  
+    var API_url = ' https://hb5fflv04i.execute-api.us-east-2.amazonaws.com/prod';
+
+    $(document).ready(function(){
+            $.ajax({
+
+                type: 'GET', 
+                url: API_url,
+                success: function(data){
+                    $('#entries').html('');
+                    data.Items.array.forEach(function(userData){
+                        $('#entries').append('<p>' + userData.message + '</p>' );
+
+                        
+                    });
+                }
+
+            });
+    });
+  
+  
+  
+  </script>
+
+ 
+
+
+</body>
+
+</html>
