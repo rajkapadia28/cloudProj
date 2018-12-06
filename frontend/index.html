@@ -14,22 +14,32 @@
 
 	</div>
 
+<form id = "form" action="#" onsubmit="return validity()">
+
 <div class="row">
 <div class="row">
   <span>
-	<input class="name" id="pid" type="text" placeholder="415315" /><label for="pid">PID</label>
-  </span>
+	<input class="name" id="pid" type="text"  placeholder="415315" minlength="7" maxlength="7" size="7" name="pid" required> <label for="pid" >PID</label>
+	</span>
+	<span id="pidIncorrect" class="text-danger font-weight-bold" >  </span>
+
+
+	<span>
+		<input class="name" id="fname" type="text" placeholder="Jane" required /><label for="fname"> First Name </label>
+		</span>
+	
+		<span>
+			<input class="name" id="lname" type="text" placeholder="Doe" required /><label for="lname"> Last Name </label>
+			</span>
   <span>
 	<input class="name" id="msg" type="text" placeholder="Welcome" /><label for="msg"> Message </label>
   </span>
-  <span>
-		<input class="name" id="Second" type="text" placeholder="Anything" /><label for="Second"> Message2 </label>
-	  </span>
+
   <span>
 
 	<label for="upper"> Upper Wear</label>
-	<select class="name" id="upper"> 
-		
+	<select class="name" id="upper" required> 
+		<option> </option>
 		<option>Tshirt</option>
 		<option>Sweater</option>
 		<option> Long-Sleeve</option>
@@ -43,8 +53,9 @@
 		<span>
 
 				<label for="bottom"> Bottom </label>
-				<select class="name" id="bottom"> 
-					
+				<select class="name" id="bottom" required> 
+					<option> </option>
+
 					<option>Shorts</option>
 					<option> Skirt </option>
 					<option> Jeans </option>
@@ -53,17 +64,11 @@
 
 				</select>
 			  </span>
-	<!-- <span>
-	  <input class="name" id="bottom" type="text" placeholder="shorts"/><label for="bottom">Bottom Clothing</label>
-	</span> -->
 
-	<!-- <span>
-	  <input class="name" id="Shoes" type="text" placeholder=" Nike"/> <label for="Shoes"> Shoes </label>
-	</span> -->
 	<span>
 
 			<label for="Shoes"> Footwear </label>
-			<select class="name" id="Shoes"> 
+			<select class="name" id="Shoes" required> 
 				
 				<option> Heels </option>
 				<option> Sandals </option>
@@ -75,14 +80,18 @@
 		  </span>
 
 	
-  </div>
-  		<button id='submitButton'>Submit</button>
+	</div>
+			<input type="submit" name= "submit" value="Submit">
+  		
 
 </div>
 
+</form>
 
 
 	<script type="text/javascript">
+
+
 
 		var API_URL =' https://xq7mvon74f.execute-api.us-west-2.amazonaws.com/clothingCall/entries';
 
@@ -107,7 +116,7 @@
 			$.ajax({
 				type: 'POST',
 				url: API_URL,
-				data: JSON.stringify({"PID": $('#pid').val(), "message": $('#msg').val(), "Second" : $('#Second').val(), "Upperwear" : $('#upper').val(),  "Bottom" : $('#bottom').val(), "Shoes" : $('#Shoes').val()}),
+				data: JSON.stringify({"PID": $('#pid').val(), "message": $('#msg').val(), "Upperwear" : $('#upper').val(),  "Bottom" : $('#bottom').val(), "Shoes" : $('#Shoes').val(), "FirstName" : $('#fname').val(), "LastName" : $('#lname').val()}),
 				contentType: "application/json",
 
 				success: function(data){
