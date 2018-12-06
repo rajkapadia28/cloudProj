@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<link rel="stylesheet" type="text/css" href="styles.css">
+ 	<title> Welcome </title>
+</head>
+<body>
+	<h1 >Clothing Journal</h1>
+	<h2>New Entry:</h2>
+ 	<div id="entries">
+ 	</div>
+ <div class="row">
+<div class="row">
+  <span>
+	<input class="name" id="pid" type="text" placeholder="415315" /><label for="pid">PID</label>
+  </span>
+  <span>
+	<input class="name" id="msg" type="text" placeholder="Welcome" /><label for="msg"> Message </label>
+  </span>
+  <span>
+		<input class="name" id="Second" type="text" placeholder="Anything" /><label for="Second"> Message2 </label>
+	  </span>
+  <span>
+ 	<label for="upper"> Upper Wear</label>
+	<select class="name" id="upper"> 
+		
+		<option>Tshirt</option>
+		<option>Sweater</option>
+		<option> Long-Sleeve</option>
+		<option> TankTop </option>
+	</select>
+  </span>
+ </div>
+ <div class="row">
+		<span>
+ 				<label for="bottom"> Bottom </label>
+				<select class="name" id="bottom"> 
+					
+					<option>Shorts</option>
+					<option> Skirt </option>
+					<option> Jeans </option>
+					<option> Pants </option>
+					<option> Dress </option>
+ 				</select>
+			  </span>
+
+	<!-- <span>
+	  <input class="name" id="bottom" type="text" placeholder="shorts"/><label for="bottom">Bottom Clothing</label>
+	</span> -->
+ 	<!-- <span>
+	  <input class="name" id="Shoes" type="text" placeholder=" Nike"/> <label for="Shoes"> Shoes </label>
+	</span> -->
+	<span>
+ 			<label for="Shoes"> Footwear </label>
+			<select class="name" id="Shoes"> 
+				
+				<option> Heels </option>
+				<option> Sandals </option>
+				<option> Shoes </option>
+				<option> Anything else </option>
+				
+ 			</select>
+		  </span>
+ 	
+  </div>
+  		<button id='submitButton'>Submit</button>
+ </div>
+ 	<script type="text/javascript">
+ 		var API_URL =' https://xq7mvon74f.execute-api.us-west-2.amazonaws.com/clothingCall/entries';
+ 		$(document).ready(function(){
+            $.ajax({
+                type: 'GET', 
+                url: API_URL,
+                success: function(data){
+                    $('#entries').html('');
+                    data.Items.array.forEach(function(userData){
+                        $('#entries').append('<p>' + userData.message + '</p>' );
+                        
+                    });
+                }
+            });
+    });
+ 		
+		$('#submitButton').on('click', function(){
+			$.ajax({
+				type: 'POST',
+				url: API_URL,
+				data: JSON.stringify({"PID": $('#pid').val(),"EntryTime": $(" ").val(),"Upperwear": $('#upper').val(), "Bottom": $('#bottom').val(), "Shoes": $('#Shoes').val()}),
+				contentType: "application/json",
+ 				success: function(data){
+					location.reload();
+				}
+			});
+ 			return false;
+		});
+	</script>
+ </body>
+</html>
